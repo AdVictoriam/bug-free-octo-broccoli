@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+data/
+backups/
+bin/
+artifacts/
+*.db
+*.db-wal
+*.db-shm
+*.lock
+__pycache__/
+*.pyc
+.DS_Store

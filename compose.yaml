@@ -1,0 +1,23 @@
+services:
+  studio:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      APP_PASSWORD: ${APP_PASSWORD:?Run python3 tools/setup.py first}
+      LISTEN_ADDR: 0.0.0.0:8080
+      DATA_DIR: /data
+      PUBLIC_URL: ${PUBLIC_URL:-http://127.0.0.1:8080}
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - studio_data:/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=64m,mode=1777
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 256
+    stop_grace_period: 30s
+volumes:
+  studio_data:
