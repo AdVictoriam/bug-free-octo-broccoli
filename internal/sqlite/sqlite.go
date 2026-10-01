@@ -44,7 +44,7 @@ func Open(path string) (*DB, error) {
 		return nil, e
 	}
 	C.sqlite3_busy_timeout(d.conn, 5000)
-	for _, s := range []string{"PRAGMA journal_mode=WAL", "PRAGMA synchronous=FULL", "PRAGMA foreign_keys=ON", "PRAGMA trusted_schema=OFF"} {
+		for _, s := range []string{"PRAGMA journal_mode=WAL", "PRAGMA synchronous=FULL", "PRAGMA foreign_keys=ON"} {
 		if _, e := d.Exec(s); e != nil {
 			d.Close()
 			return nil, e
